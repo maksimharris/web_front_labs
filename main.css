@@ -23,3 +23,21 @@ footer{
     padding: 10px;
     font-size: 14pt;
 }
+a:link{
+    color:lightgreen;
+    text-decoration:underline;
+}
+a:visited{
+    color: darkblue;
+    text-decoration: line-through;   
+}
+a:hover{
+    color:red;
+    text-decoration:underline;
+    text-shadow: 5px 7px 5px;
+}
+a:active{
+    color:black;
+    opacity:0.3;
+}
+
