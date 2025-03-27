@@ -45,4 +45,17 @@ a:active{
     color:black;
     opacity:0.3;
 }
+div.menu{
+    background-color: rgb(228, 217, 217);
+    border-bottom: 7px solid #00880080;
+    border-right: 7px solid #00880080;
+    border-left: 7px solid darkred;
+    border-top: 7px solid darkred;
+    width:300px;
+    margin: 0 auto;
+}
+div.menu:hover{
+    background-color: #ffffff30;
+    box-shadow: 5px 5px 15px #00000030;
+}
 
