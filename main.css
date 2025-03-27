@@ -23,13 +23,16 @@ footer{
     padding: 10px;
     font-size: 14pt;
 }
+a{
+    color:green;
+    text-decoration:none;
+}
 a:link{
     color:lightgreen;
-    text-decoration:underline;
 }
 a:visited{
     color: darkblue;
-    text-decoration: line-through;   
+    text-decoration: underline;   
 }
 a:hover{
     color:red;
