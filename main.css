@@ -34,7 +34,7 @@ a{
     transition: 1s 2s;
 }
 a:link{
-    color:lightgreen;
+    color:grey;
 }
 a:visited{
     color: darkblue;
