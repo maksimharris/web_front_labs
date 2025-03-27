@@ -22,6 +22,11 @@ footer{
     margin: 10px;
     padding: 10px;
     font-size: 14pt;
+    text-align:right;
+    position: fixed;
+    bottom:0;
+    right:0;
+    left:0;
 }
 a{
     color:green;
@@ -57,5 +62,8 @@ div.menu{
 div.menu:hover{
     background-color: #ffffff30;
     box-shadow: 5px 5px 15px #00000030;
+}
+main{
+    margin: 10px 20px 62.6562px;
 }
 
