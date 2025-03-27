@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon-16x16.png">
     <link rel="icon" href="favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Merriweather:wght@400;700&family=Montserrat:wght@400;700&family=Bad+Script&family=PT+Mono&family=Russo+One&family=Underdog&family=Fira+Sans+Condensed:wght@400;700&family=Rubik+Mono+One&family=Jura:wght@400;700&display=swap" rel="stylesheet">
     <style>
         .citations{
             border:1px solid red;
@@ -29,12 +30,221 @@
             margin-top: 30px;
             margin-left:50%;
         }
+        .hunty-hump{
+            background-color: #f5f5f5;;
+            padding: 20px;
+            border: 1px, #c9a66b;
+            box-shadow: 10px 10px 3px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .hunty-text{
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #5a5a5a;
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 1px 1px 2px rgba(90,90,90,0.3);
+        }
+        .hunty-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left:50%;
+            text-shadow: 1px 1px 2px rgba(90,90,90,0.3);
+            color: #8b9dc3
+        }
+        .john-garik{
+            background:linear-gradient(#000,#8b0000);
+            padding: 20px;
+            border: 1px, #c9a66b;
+            box-shadow: 10px 10px 3px #D4AF37;
+            margin: 20px;
+        }
+        .john-text{
+            font-size: 30px;
+            font-family: 'Merriweather', serif;
+            font-weight: bold;
+            text-align: center;
+            color:#c9a66b;
+        }
+        .john-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left: 50%;
+            text-shadow: 2px 2px 5px #D4AF37;
+            color: #c9a66b
+        }
+        .pcc{
+            background: #000;
+            padding: 20px;
+            border: 1px, #d94350;
+            box-shadow: 10px 10px 3px;
+            margin: 20px;
+            font-family:"Montserrat", sans-serif;
+            color:#f0f0f0;
+        }
+        .pcc-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+            color:#f0f0f0;
+        }
+        .pcc-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left: 50%;   
+        }
+        .buda{
+            background-color: #e8c547;
+            padding: 20px;
+            border: 1px, #6b8f71;
+            box-shadow: 10px 10px 3px;
+            margin: 20px;
+            color:#5c2a9a;
+            opacity:0.8;
+        }
+        .buda-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .buda-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
+        .kai{
+            background-color: #2A2A2A;
+            padding: 20px;
+            box-shadow: 10px 10px 3px #8B008B;
+            margin: 20px;
+            color:#00ced1;
+            opacity:0.8;
+            font-family: "Impact";
+        }
+        .kai-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .kai-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: bold;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
+        .onm{
+            background-color: #808080;
+            padding: 20px;
+            box-shadow: 10px 10px 3px;
+            text-shadow: 5px 7px 5px;
+            margin: 20px;
+            color:#762609;
+            font-family: "Helvetica"; 
+        }
+        .onm-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .onm-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: bold;
+            margin-top: 30px;
+            margin-left: 50%; 
+        }
+        .lov{
+            background-color: #4682B4;
+            padding: 20px;
+            box-shadow: 10px 10px 3px #FF69B4;
+            margin: 20px;
+            color: #FFD700;
+            font-family: "underdog"; 
+        }
+        .lov-text{
+            font-size: 30px;
+            text-align: center;
+        }
+        .lov-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: bold;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
+        .ice{
+            background-color: #00008B;
+            padding: 20px;
+            margin: 20px;
+            color: #FFFFFF ;
+            font-family: "Fira Sans"; 
+        }
+        .ice-text{
+            font-size: 30px;
+            text-align: center;
+        }
+        .ice-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: bold;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
+        .fk{
+            background-color: #708090 ;
+            padding: 20px;
+            box-shadow: 10px 10px 3px #000000 ;
+            margin: 20px;
+            color: #800000 ;
+            font-family: "Rubik Mono One"; 
+        }
+        .fk-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .fk-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
+        .sem{
+            background-color: #9370DB  ;
+            padding: 20px;
+            box-shadow: 10px 10px 3px;
+            margin: 20px;
+            color: #2F4F4F  ;
+            font-family: "Jura";
+        }
+        .sem-text{
+            font-size: 30px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .sem-author{
+            text-align:left;
+            font-size: 30px;
+            font-style: italic;
+            margin-top: 30px;
+            margin-left: 50%;
+        }
     </style>
 </head>
 <body>
     <header>
         НГТУ, ФБИ, Лабораторная работа 3
-        <hr>
+        <hr> 
     </header>
     <main>
         <div class = "citations">
@@ -42,7 +252,90 @@
                 Стремитесь не к успеху, а к ценностям, которые он дает.
             </div>
             <div class = "author">
-                Альберт Эйнштейн
+                &copy; Альберт Эйнштейн
+            </div>
+        </div>
+        <div class = "hunty-hump">
+            <div class = "hunty-text">
+                Каждый новый день жизнь проводит мне экзамен.
+            </div>
+            <div class = "hunty-author">
+                &copy; HUNTY HUMP
+            </div>
+        </div>
+        <div class = "john-garik">
+            <div class = "john-text">
+                Ты чувствуешь мой грув? Мне нужна дева праведнее, 
+                чем <span style = "text-shadow: 1px 1px 3px; color: #D4AF37; ">Руфь</span>
+            </div>
+            <div class = "john-author">
+                &copy; Джон Гарик
+            </div>
+        </div>
+        <div class = "pcc">
+            <div class = "pcc-text">
+                Я лучше умру, чем окажусь последним. 
+            </div>
+            <div class = "pcc-author">
+                &copy;Джордан Картер
+            </div>
+        </div>
+        <div class = "buda">
+            <div class = "buda-text">
+                Ты живёшь во мне, ты меня часть. Я тебя не забывал, зачем тебя вспоминать?     
+            </div>
+            <div class = "buda-author">
+                &copy;OG Buda
+            </div>
+        </div>
+        <div class = "kai">
+            <div class = "kai-text">
+                Я боюсь только самого себя, ведь я в своей голове столько раз умирал. 
+            </div>
+            <div class = "kai-author">
+                &copy;Kai Angel
+            </div>
+        </div>
+        <div class = "onm">
+            <div class = "onm-text">
+                Мы внесем тебя в меню, потом закажем. Мы всегда на кухне, мы всегда всех варим. 
+            </div>
+            <div class = "onm-author">
+                &copy;163ONMYNECK
+            </div>
+        </div>
+        <div class = "lov">
+            <div class = "lov-text">
+                Возможно, иногда тупой, но точно не дурак
+            </div>
+            <div class ="lov-author">
+                &copy;LOV66
+            </div>
+        </div>
+        <div class = "ice">
+            <div class = "ice-text">
+                Все так хотят купить, но я им не продам.
+                Но я их обману, я тебя им не отдам
+            </div>
+            <div class = "ice-author">
+                &copy;ICEGERGERT
+            </div>
+        </div>
+        <div class ="fk">
+            <div class = "fk-text">
+                Сразу сообщи будешь курить или нет?
+                Но учти что "нет" это не правильный ответ. 
+            </div>
+            <div class ="fk-author">
+                &copy;4K
+            </div>
+        </div>
+        <div class = "sem">
+            <div class = "sem-text">
+                С теми на кого смотрел с низу, перешёл на ты. 
+            </div>
+            <div class = "sem-author">
+                &copy;SEEMEE
             </div>
         </div>
     </main>
