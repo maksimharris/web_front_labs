@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Позиционирование</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <style>
+        div{
+            width: 300px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            background-color: white;
+            border:2px dotted darkgreen;
+            margin: 15px;
+            position: relative;
+            z-index:1;
+        }
+        .position-relative{
+            position: relative;
+            left:150px;
+            top:-130px;
+            z-index:0;
+        }
+        .position-relative:hover{
+            z-index: 2;
+        }
+        .position-absolute{
+            position: absolute;
+            left:300px;
+        }
+        .position-absolute:hover{
+            width: 350px;
+            height: 120px;
+            text-shadow: 1px 1px 1px;
+            color:brown;
+            box-shadow:1px 1px 1px;
+            line-height: 120px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 4
+        <hr>
+    </header>
+    <main>
+        <div>static</div>
+        <div>static</div>
+        <div class = "position-relative">relative</div>
+        <div>static</div>
+        <div>static</div>
+        <div class = "position-absolute">absolute</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+        <div>static</div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
