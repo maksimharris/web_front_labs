@@ -48,6 +48,17 @@
         .tag-13 { background: #FFA500; transform: rotate(-3deg); font-size: 18px; }
         .tag-14 { background: #FFD700; transform: rotate(6deg); font-size: 12px; }
         .tag-15 { background: #B8860B; transform: rotate(-9deg); font-size: 22px; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(var(--rotate)); }
+            50% { transform: translateY(-10px) rotate(var(--rotate)); }
+        }
+        .tag {
+            animation: float 6s ease-in-out infinite;
+            --rotate: 0deg;
+        }
+        .tag:hover {
+            animation: none;
+        }
     </style>
 </head>
 <body>
