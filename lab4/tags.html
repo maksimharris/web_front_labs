@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Облако тегов</title>
+    <link rel="stylesheet" href="../main.css">
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <style>
+        .tags-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            }
+        .tag {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            }
+        .tag:hover {
+            transform: scale(1.2);
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            }
+        .tag-1 { background: #8B0000; transform: rotate(-5deg); font-size: 14px; }
+        .tag-2 { background: #B22222; transform: rotate(3deg); font-size: 18px; }
+        .tag-3 { background: #DC143C; transform: rotate(-7deg); font-size: 16px; }
+        .tag-4 { background: #FF0000; transform: rotate(5deg); font-size: 20px; }
+        .tag-5 { background: #FF4500; transform: rotate(-2deg); font-size: 12px; }
+        .tag-6 { background: #FF6347; transform: rotate(8deg); font-size: 22px; }
+        .tag-7 { background: #FF7F50; transform: rotate(-10deg); font-size: 14px; }
+        .tag-8 { background: #CD5C5C; transform: rotate(4deg); font-size: 16px; }
+        .tag-9 { background: #F08080; transform: rotate(-8deg); font-size: 18px; }
+        .tag-10 { background: #E9967A; transform: rotate(2deg); font-size: 20px; }
+        .tag-11 { background: #FFA07A; transform: rotate(-5deg); font-size: 14px; }
+        .tag-12 { background: #FF8C00; transform: rotate(7deg); font-size: 16px; }
+        .tag-13 { background: #FFA500; transform: rotate(-3deg); font-size: 18px; }
+        .tag-14 { background: #FFD700; transform: rotate(6deg); font-size: 12px; }
+        .tag-15 { background: #B8860B; transform: rotate(-9deg); font-size: 22px; }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 4
+    </header>
+    <main>
+        <div class="tags-cloud">
+            <div class="tag tag-1" style="--rotate: -5deg;">Bullet Time</div>
+            <div class="tag tag-2" style="--rotate: 3deg;">Noir</div>
+            <div class="tag tag-3" style="--rotate: -7deg;">Painkillers</div>
+            <div class="tag tag-4" style="--rotate: 5deg;">NYPD</div>
+            <div class="tag tag-5" style="--rotate: -2deg;">Valkyr</div>
+            <div class="tag tag-6" style="--rotate: 8deg;">Mona Sax</div>
+            <div class="tag tag-7" style="--rotate: -10deg;">Snow</div>
+            <div class="tag tag-8" style="--rotate: 4deg;">Nightmares</div>
+            <div class="tag tag-9" style="--rotate: -8deg;">Revenge</div>
+            <div class="tag tag-10" style="--rotate: 2deg;">Punchinello</div>
+            <div class="tag tag-11" style="--rotate: -5deg;">Dive</div>
+            <div class="tag tag-12" style="--rotate: 7deg;">Roscoe Street</div>
+            <div class="tag tag-13" style="--rotate: -3deg;">Ragnarok</div>
+            <div class="tag tag-14" style="--rotate: 6deg;">Lupino</div>
+            <div class="tag tag-15" style="--rotate: -9deg;">Address Unknown</div>
+        </div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
