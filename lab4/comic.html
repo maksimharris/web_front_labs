@@ -10,11 +10,96 @@
     <link rel="icon" href="../lab3/favicon-32x32.png">
     <style>
         img{
-            display: block;
-            margin-left: 600px;
-            margin-top: 100px;
+            display: flex;
+            position: absolute;
+            left: 300px;
+            top: 100px;
+            z-index: 0;
+        }
+        .comic-container{
+            position: relative;
+            height:495px;
+            width:665px;
+            border: 2px solid black;
+            left: 270px;
+            top: 18px;
+            z-index:1;
+        }
+        .cl{
+            visibility: hidden;
+        }
+        .comic-container:hover .cl{
+            visibility: visible;
         }
 
+        .on{
+            position: relative;
+            background-image: url('comcloud.png');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            width: 300px;
+            height: 500px;
+            left: -70px;
+            top: 207px;
+            z-index:1;
+        }
+        .tw{
+            position: relative;
+            width:650px;
+            height: 66.5px;
+            left:5px;
+            bottom: 80px;
+            background-color: rgba(104, 99, 26);
+            text-align: center;
+            opacity:1;
+            z-index:1;
+            font-size: 30pt;
+            color:black;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: italic;
+            border: 2px solid black;
+            text-shadow: 1px 2px 2px;
+        }
+        .th{
+            position: relative;
+            width:30px;
+            height:15px;
+            left:530px;
+            bottom: 383px;
+            background-color: rgb(220,220,220);
+            z-index:1;
+            border-radius: 50%;
+            border: 2px solid black;
+            transition: 0.4s 0.2s;
+        }
+        .fo{
+            position: relative;
+            width:80px;
+            height:45px;
+            left:565px;
+            bottom: 443px;
+            background-color: rgb(220,220,220);
+            z-index:1;
+            border-radius: 50%;
+            border: 2px solid black;
+            transition: 0.3s 0.3s;
+        }
+        .fi{
+            position: relative;
+            width:150px;
+            height:90px;
+            left:615px;
+            bottom: 578px;
+            background-color: rgb(220,220,220);
+            z-index:1;
+            border-radius: 50%;
+            border: 2px solid black;
+            text-align: center;
+            font-size:12pt;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: black;
+            transition: 0.2s 0.4s;
+        }
     </style>
 </head>
 <body>
@@ -23,11 +108,13 @@
         <hr>
     </header>
     <main>
-        <div class ="on"></div>
-        <div class = "tw"></div>
-        <div class = "th"></div>
-        <div class = "fo"></div>
-        <div class = "fi"></div>
+        <div class = "comic-container">
+            <div class ="cl on"><span style="position: relative; top: 40px; left: 120px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size:30pt; opacity:0.8; color: black;">Бах!</span></div>
+            <div class = "cl tw">Клуб "Рагнарёк"</div>
+            <div class = "cl th"></div>
+            <div class = "cl fo"></div>
+            <div class = "cl fi"><span style="position: relative; top:20px;">Не думай, что ты сможешь одолеть меня!</span></div>
+        </div>
         <img src = "maxpayne.jpg" height="500">
     </main>
     <footer>
