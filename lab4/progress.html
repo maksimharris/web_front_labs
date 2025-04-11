@@ -10,17 +10,17 @@
     <link rel="icon" href="../lab3/favicon-16x16.png">
     <link rel="icon" href="../lab3/favicon-32x32.png">
     <style>
-      .progress-window {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px;
-        text-align: center;
+        .progress-window {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            text-align: center;
         }
 
         .progress-container {
-        margin-bottom: 20px;
+            margin-bottom: 20px;
         }
 
         .progress-bar {
@@ -36,16 +36,12 @@
             width: 0%;
             height: 100%;
             background-color: #152ae9;
-            transition: width 0.1s linear;
+            animation: fillProgress 5s linear forwards;
+            animation-play-state: paused;
         }
-
-        .progress-text {
-            display: block;
-            margin-top: 5px;
-            font-family: Arial, sans-serif;
-        }
-
         .progress-button {
+            position: relative;
+            top:100px;
             padding: 10px 20px;
             background-color: #2196F3;
             color: white;
@@ -63,6 +59,15 @@
         .progress-button:active {
             box-shadow: none;
         }
+
+        .progress-button:active + .progress-container .progress-fill {
+            animation-play-state: running;
+        }
+
+        @keyframes fillProgress {
+            from { width: 0% }
+            to { width: 100% }
+        }
     </style>
 </head>
 <body>
@@ -71,45 +76,18 @@
     </header>
     <main>
         <div class="progress-window">
+            Степень прогресса
+            <button class="progress-button">Нажмите и удерживайте</button>
             <div class="progress-container">
                 <div class="progress-bar">
                     <div class="progress-fill"></div>
                 </div>
-                <span class="progress-text">0%</span>
             </div>
-            <button class="progress-button">Нажмите и удерживайте</button>
         </div>
     </main>
     <footer>
         &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
     </footer>
-    <script>
-        const button = document.querySelector('.progress-button');
-        const progressFill = document.querySelector('.progress-fill');
-        const progressText = document.querySelector('.progress-text');
 
-        let interval;
-        let progress = 0;
-
-        button.addEventListener('mousedown', () => {
-            interval = setInterval(() => {
-                if (progress >= 100) {
-                    clearInterval(interval);
-                    return;
-                }
-                progress += 1;
-                progressFill.style.width = `${progress}%`;
-                progressText.textContent = `${progress}%`;
-            }, 50); // 5 секунд / 100% = 50 мс на 1%
-        });
-
-        button.addEventListener('mouseup', () => {
-            clearInterval(interval);
-        });
-
-        button.addEventListener('mouseleave', () => {
-            clearInterval(interval);
-        });
-    </script>
 </body>
 </html>
