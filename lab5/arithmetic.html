@@ -41,6 +41,44 @@
             let hel = 'Добрый день, Егор Иванович, поставьте 5 за лабораторную работу. Пожалуйста!\nПять поставили - студента радостным оставили';
             alert(hel)
         }
+        function showDiv(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            if(b==0){
+                alert('На ноль делить нельзя!');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color ='red';
+                inputB.style.borderColor = 'red';
+                return;
+            }
+            if(isNaN(a)){
+                alert('Пустое значение A');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color ='grey';
+                inputA.style.borderColor = 'grey';
+                return;
+            }
+            if(isNaN(b)){
+                alert('Пустое значение B');
+                inputB.focus();
+                inputB.select();
+                inputB.style.color ='grey';
+                inputB.style.borderColor = 'grey';
+                return;
+            }
+
+            inputA.style.color ='';
+            inputA.style.borderColor = ''
+            inputB.style.color ='';
+            inputB.style.borderColor = '';
+            
+            let result = a/b;
+            alert('Деление '+a+' на '+b+' равно: ' + result);
+        }
     </script>
     <style>
         .message{
@@ -65,6 +103,7 @@
         <div class="message" onclick="showsum()">Найти сумму чисел</div>
         <div class="message" onclick="showrazn()">Найти разность чисел</div>
         <div class="message" onclick="showproizv()">Найти произведение чисел</div>
+        <div class="message" onclick="showDiv()">Найти деление чисел</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
     <footer style = 'cursor: pointer;' ondblclick="showFooter()">
