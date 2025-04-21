@@ -17,6 +17,22 @@
             let result = a+b;
             alert('Сумма '+a+' и '+b+' равна: ' + result);
         }
+        function showrazn(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            let result = a-b;
+            alert('Разность '+a+' и '+b+' равна: ' + result);
+        }
+        function showproizv(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
+            let result = a*b;
+            alert('Произведение '+a+' и '+b+' равно: ' + result);
+        }
         function showAuthor(){
             let author = 'Автор страницы:\nПисарев Максим Иванович';
             alert(author);
@@ -47,6 +63,8 @@
         <label>Первое число: <input type="number" value = "5154" id = 'numberA'></label><br>
         <label>Второе число: <input type="number" value = "7194" id = 'numberB'></label><br>
         <div class="message" onclick="showsum()">Найти сумму чисел</div>
+        <div class="message" onclick="showrazn()">Найти разность чисел</div>
+        <div class="message" onclick="showproizv()">Найти произведение чисел</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
     <footer style = 'cursor: pointer;' ondblclick="showFooter()">
