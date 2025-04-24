@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 5</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function sum(){
+            let insvedm = document.getElementById('svedm');
+            let intextm = document.getElementById('textm');
+            let inbitsm = document.getElementById('bitsm');
+            let inalltm = document.getElementById('alltm');
+            let ism = parseInt(insvedm.value);
+            let itm = parseInt(intextm.value);
+            let ibm = parseInt(inbitsm.value);
+            let iam = parseInt(inalltm.value);
+            if(
+                ((isNaN(ism)||(ism<0))&&(isNaN(itm)||(itm<0)))
+                ||((isNaN(ism)||(ism<0))&&(isNaN(ibm)||(ibm<0)))
+                ||((isNaN(ism)||(ism<0))&&(isNaN(iam)||(iam<0)))
+                ||((isNaN(itm)||(itm<0))&&(isNaN(ibm)||(ibm<0)))
+                ||((isNaN(itm)||(itm<0))&&(isNaN(iam)||(iam<0)))
+                ||((isNaN(ibm)||(ibm<0))&&(isNaN(iam)||(iam<0)))
+                ||((isNaN(ism)||(ism<0))&&(isNaN(itm)||(itm<0))&&(isNaN(ibm)||(ibm<0)))
+                ||((isNaN(ism)||(ism<0))&&(isNaN(itm)||(itm<0))&&(isNaN(iam)||(iam<0)))
+                ||((isNaN(ism)||(ism<0))&&(isNaN(ibm)||(ibm<0))&&(isNaN(iam)||(iam<0)))
+                ||((isNaN(itm)||(itm<0))&&(isNaN(iam)||(iam<0))&&(isNaN(ibm)||(ibm<0)))
+                ||((isNaN(itm)||(itm<0))&&(isNaN(iam)||(iam<0))&&(isNaN(ibm)||(ibm<0))&&(isNaN(ism)||(ism<0)))){
+                    alert('Несколько некорректных значений');
+                    return;
+
+            }
+            if(isNaN(ism)||(ism<0)){
+                alert('Некорректные значение в поле 1 позиции');
+                insvedm.focus();
+                insvedm.select();
+                insvedm.style.borderColor = 'grey';
+                insvedm.style.borderWidth = 'thin';
+                return;
+            }
+            if(isNaN(itm)||(itm<0)){
+                alert('Некорректные значение в поле 2 позиции');
+                intextm.focus();
+                intextm.select();
+                intextm.style.borderColor = 'grey';
+                intextm.style.borderWidth = 'thin';
+                return;
+            }
+            if(isNaN(ibm)||(ibm<0)){
+                alert('Некорректные значение в поле 3 позиции');
+                inbitsm.focus();
+                inbitsm.select();
+                inbitsm.style.borderColor = 'grey';
+                inbitsm.style.borderWidth = 'thin';
+                return;
+            }
+            if(isNaN(iam)||(iam<0)){
+                alert('Некорректные значение в поле 4 позиции');
+                inalltm.focus();
+                inalltm.select();
+                inalltm.style.borderColor = 'grey';
+                inalltm.style.borderWidth = 'thin';
+                return;
+            }
+            insvedm.style.borderColor = '';
+            insvedm.style.borderWidth = '';
+            intextm.style.borderColor = '';
+            intextm.style.borderWidth = '';
+            inbitsm.style.borderColor = '';
+            inbitsm.style.borderWidth = '';
+            inalltm.style.borderColor = '';
+            inalltm.style.borderWidth = '';
+            let ras = document.getElementById('raschet')
+            ras.innerHTML = (ism*150)+(itm*50)+(ibm*40)+(iam*220) + " руб.";                                                                                                                                                                                                                                                  
+        }
+        function clr(){
+            let insvedm = document.getElementById('svedm');
+            let intextm = document.getElementById('textm');
+            let inbitsm = document.getElementById('bitsm');
+            let inalltm = document.getElementById('alltm');
+            let ism = parseInt(insvedm.value);
+            let itm = parseInt(intextm.value);
+            let ibm = parseInt(inbitsm.value);
+            let iam = parseInt(inalltm.value);
+            insvedm.value = '';
+            intextm.value='';
+            inbitsm.value='';
+            inalltm.value='';
+            let ras = document.getElementById('raschet')
+            ras.innerHTML ='';
+        }
+    </script>
+    <style>
+        #raschet{
+            border: 2px solid black;
+            width:300px;
+            height:40px;
+            text-align: center;
+        }
+        .nums{
+            padding:2px;
+            margin:3px;
+        }
+        .title{
+            padding-left:90px;  
+        }
+        #svedm{
+            width:200px;
+        }
+        #textm{
+            width:200px;
+        }
+        #bitsm{
+            width:200px;
+        }
+        #alltm{
+            width:200px;
+        }
+        .cart{
+            margin-left:40%;
+            padding:5px;
+            border:3px solid black;
+            width:400px;
+            height:300px;
+        }
+        .buttons{
+            padding:2px;
+            margin:3px;
+            margin-top:1px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 5
+        <hr>
+    </header>
+    <main>
+        <div class="cart">
+            <label class = "title">Корзина услуг OPIUM TKUSIC</label><br>
+            <div class="nums">
+                <label>Сведение трека(150/шт)</label><br>
+                <input type="number" placeholder = "введите количество услуги" id = 'svedm'><br>
+                <label>Написание текста для трека(50/шт)</label><br>
+                <input type="number" placeholder = "введите количество услуги" id = 'textm'><br>
+                <label>Написание битов(40/шт)</label><br>
+                <input type="number" placeholder = "введите количество услуги" id = 'bitsm'><br>
+                <label>Составление трека под ключ(220/шт)</label><br>
+                <input type="number" placeholder = "введите количество услуги" id = 'alltm'><br>
+            </div>
+            <div class="buttons">
+                <input type="button" value="Расчёт" onclick="sum()" style="margin-top: 6px;"><br>
+                <div id="raschet" style="margin-top: 6px;"></div>
+                <input type="button" value="Очистка" onclick="clr()" style="margin-top: 6px;"><br>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+    
+</body>
+</html>
