@@ -52,6 +52,7 @@
                 inputB.select();
                 inputB.style.color ='red';
                 inputB.style.borderColor = 'red';
+                inputB.style.borderWidth = 'thin';
                 return;
             }
             if(isNaN(b)&&isNaN(a)){
@@ -59,9 +60,11 @@
                 inputB.focus();
                 inputB.select();
                 inputB.style.borderColor = 'grey';
+                inputB.style.borderWidth = 'thin';
                 inputA.focus();
                 inputA.select();
-                input.style.borderColor = 'grey';
+                inputA.style.borderColor = 'grey';
+                inputA.style.borderWidth = 'thin';
                 return;
             }
             if(isNaN(a)){
@@ -69,6 +72,7 @@
                 inputA.focus();
                 inputA.select();
                 input.style.borderColor = 'grey';
+                inputA.style.borderWidth = 'thin';
                 return;
             }
             if(isNaN(b)){
@@ -76,12 +80,15 @@
                 inputB.focus();
                 inputB.select();
                 inputB.style.borderColor = 'grey';
+                inputB.style.borderWidth = 'thin';
                 return;
             }
             inputA.style.color ='';
-            inputA.style.borderColor = ''
+            inputA.style.borderColor = '';
+            inputA.style.borderWidth = 'thin';
             inputB.style.color ='';
             inputB.style.borderColor = '';
+            inputB.style.borderWidth = 'thin';
             let result = a/b;
             alert('Деление '+a+' на '+b+' равно: ' + result);
         }
@@ -96,6 +103,7 @@
                 inputA.select();
                 inputA.style.color ='grey';
                 inputA.style.borderColor = 'grey';
+                inputA.style.borderWidth = 'thin';
                 return;
             }
             if(isNaN(b)){
@@ -104,6 +112,7 @@
                 inputB.select();
                 inputB.style.color ='grey';
                 inputB.style.borderColor = 'grey';
+                inputB.style.borderWidth = 'thin';
                 return;
             }
             if(isNaN(b)&&isNaN(a)){
@@ -111,9 +120,11 @@
                 inputB.focus();
                 inputB.select();
                 inputB.style.borderColor = 'grey';
+                inputB.style.borderWidth = 'thin';
                 inputA.focus();
                 inputA.select();
-                input.style.borderColor = 'grey';
+                inputA.style.borderColor = 'grey';
+                inputA.style.borderWidth = 'thin';
                 return;
             }
             if (a==0&&b==0){
@@ -121,17 +132,31 @@
                 inputB.focus();
                 inputB.select();
                 inputB.style.borderColor = 'grey';
+                inputB.style.borderWidth = 'thin';
                 inputA.focus();
                 inputA.select();
                 input.style.borderColor = 'grey';
+                inputA.style.borderWidth = 'thin';
                 return;
             }
             inputA.style.color ='';
-            inputA.style.borderColor = ''
+            inputA.style.borderColor = '';
+            inputA.style.borderWidth = 'thin';
             inputB.style.color ='';
             inputB.style.borderColor = '';
+            inputB.style.borderWidth = 'thin';
             let result = a**b;
             alert('Возведение '+a+" в степень "+b+" равно "+result)
+        }
+        function changeOutput(buttonNum,backColor,textColor,borRadius,wid,hg){
+            let output = document.getElementById('output');
+            output.innerHTML = 'Нажата кнопка '+buttonNum;
+            output.style.backgroundColor = backColor;
+            output.style.color = textColor;
+            output.style.borderRadius = borRadius;
+            output.style.width = width;
+            output.style.height = hg;
+            output.style.textAlign = 'center';
         }
     </script>
     <style>
@@ -143,6 +168,12 @@
             border: 2px solid red;
             background-color: aqua;
             cursor: pointer;
+        }
+        #output{
+            border: 1px;
+            width:300px;
+            height:40px;
+            text-align: center;
         }
     </style>
 </head>
@@ -160,6 +191,13 @@
         <div class="message" onclick="showDiv()">Найти деление чисел</div>
         <div class="message" onclick="showStep()">Возвести число A в степень B</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
+        <div>
+            <input type="button" value="Кнопка 1" onclick="changeOutput(1,'red','yellow','20%','20px','20px')">
+            <input type="button" value="Кнопка 2" onclick="changeOutput(2,'black','lime','0%','20px','20px')">
+            <input type="button" value="Кнопка 3" onclick="changeOutput(3,'white','black','40%','20px','20px')">
+            <input type="button" value="Кнопка 4" onclick="changeOutput(4,'blue','white','100%','20px','20px')">
+        </div>
+        <div id="output"></div>
     </main>
     <footer style = 'cursor: pointer;' ondblclick="showFooter()">
         <hr>
