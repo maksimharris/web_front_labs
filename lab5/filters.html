@@ -20,9 +20,9 @@
             document.getElementById('blurImage').style.filter='brightness('+value+')';
         }
         function contrastChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+            let value = document.getElementById('contrastvalue').value+'%';
+            document.getElementById('outputcontrast').innerText=value;
+            document.getElementById('blurImage').style.filter='contrast('+value+')';
         }
         function grayscaleChange(){
             let value = document.getElementById('blurValue').value+'px';
@@ -67,7 +67,11 @@
             <input type="range" min="0" max="500" value="100" onchange="brightnessChange()" id="brightvalue">
             <span id="outputbright"></span>
         </div>
-        <div></div>
+        <div>
+            Контраст<br>
+            <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastvalue">
+            <span id="outputcontrast"></span>
+        </div>
         <div></div>
         <div></div>
         <div></div>
