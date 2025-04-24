@@ -106,15 +106,32 @@
                 inputB.style.borderColor = 'grey';
                 return;
             }
-            if(isNaN(a)){
-                alert('Пустое значение A');
+            if(isNaN(b)&&isNaN(a)){
+                alert('Пустое значение B и A');
+                inputB.focus();
+                inputB.select();
+                inputB.style.borderColor = 'grey';
                 inputA.focus();
                 inputA.select();
-                inputA.style.color ='grey';
-                inputA.style.borderColor = 'grey';
+                input.style.borderColor = 'grey';
                 return;
             }
-
+            if (a==0&&b==0){
+                alert('Нельзя '+a+" возвести в "+b)
+                inputB.focus();
+                inputB.select();
+                inputB.style.borderColor = 'grey';
+                inputA.focus();
+                inputA.select();
+                input.style.borderColor = 'grey';
+                return;
+            }
+            inputA.style.color ='';
+            inputA.style.borderColor = ''
+            inputB.style.color ='';
+            inputB.style.borderColor = '';
+            let result = a**b;
+            alert('Возведение '+a+" в степень "+b+" равно "+result)
         }
     </script>
     <style>
@@ -141,6 +158,7 @@
         <div class="message" onclick="showrazn()">Найти разность чисел</div>
         <div class="message" onclick="showproizv()">Найти произведение чисел</div>
         <div class="message" onclick="showDiv()">Найти деление чисел</div>
+        <div class="message" onclick="showStep()">Возвести число A в степень B</div>
         <div class="message" onclick="showAuthor()">Узнать, кто автор страницы</div>
     </main>
     <footer style = 'cursor: pointer;' ondblclick="showFooter()">
