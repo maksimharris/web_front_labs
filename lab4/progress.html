@@ -51,7 +51,7 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             transition: box-shadow 0.3s;
         }
-
+        
         .progress-button:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
@@ -61,7 +61,7 @@
         }
 
         .progress-button:active + .progress-container .progress-fill {
-            animation-play-state: running;
+            animation-play-state:running;
         }
 
         @keyframes fillProgress {
@@ -76,10 +76,10 @@
     </header>
     <main>
         <div class="progress-window">
-            Степень прогресса
             <button class="progress-button">Нажмите и удерживайте</button>
             <div class="progress-container">
                 <div class="progress-bar">
+                    <div class="progress-title">Степень прогресса<div>
                     <div class="progress-fill"></div>
                 </div>
             </div>
