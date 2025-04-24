@@ -54,6 +54,42 @@
                 inputB.style.borderColor = 'red';
                 return;
             }
+            if(isNaN(b)&&isNaN(a)){
+                alert('Пустое значение B и A');
+                inputB.focus();
+                inputB.select();
+                inputB.style.borderColor = 'grey';
+                inputA.focus();
+                inputA.select();
+                input.style.borderColor = 'grey';
+                return;
+            }
+            if(isNaN(a)){
+                alert('Пустое значение в A')
+                inputA.focus();
+                inputA.select();
+                input.style.borderColor = 'grey';
+                return;
+            }
+            if(isNaN(b)){
+                alert('Пустое значение в B')
+                inputB.focus();
+                inputB.select();
+                inputB.style.borderColor = 'grey';
+                return;
+            }
+            inputA.style.color ='';
+            inputA.style.borderColor = ''
+            inputB.style.color ='';
+            inputB.style.borderColor = '';
+            let result = a/b;
+            alert('Деление '+a+' на '+b+' равно: ' + result);
+        }
+        function showStep(){
+            let inputA = document.getElementById('numberA');
+            let inputB = document.getElementById('numberB');
+            let a = parseInt(inputA.value);
+            let b = parseInt(inputB.value);
             if(isNaN(a)){
                 alert('Пустое значение A');
                 inputA.focus();
@@ -70,14 +106,15 @@
                 inputB.style.borderColor = 'grey';
                 return;
             }
+            if(isNaN(a)){
+                alert('Пустое значение A');
+                inputA.focus();
+                inputA.select();
+                inputA.style.color ='grey';
+                inputA.style.borderColor = 'grey';
+                return;
+            }
 
-            inputA.style.color ='';
-            inputA.style.borderColor = ''
-            inputB.style.color ='';
-            inputB.style.borderColor = '';
-            
-            let result = a/b;
-            alert('Деление '+a+' на '+b+' равно: ' + result);
         }
     </script>
     <style>
