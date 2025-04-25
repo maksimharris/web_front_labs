@@ -42,9 +42,9 @@
             document.getElementById('blurImage').style.filter='huerotate('+value+')';
         }
         function invertChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+            let value = document.getElementById('invertvalue').value+'%';
+            document.getElementById('outputinvert').innerText=value;
+            document.getElementById('blurImage').style.filter='invert('+value+')';
         }
         function saturareChange(){
             let value = document.getElementById('blurValue').value+'px';
@@ -89,9 +89,21 @@
             <input type="range" min="0" max="360" value="0" onchange="huerotateChange()" id="huerotatevalue">
             <span id="outputhuerotate"></span>
         </div>
-        <div></div>
-        <div></div>
-        <div></div>
+        <div>
+            Инвертирование
+            <input type="range" min="0" max="100" value="0" onchange="invertChange()" id="invertvalue">
+            <span id="outputinvert"></span>
+        </div>
+        <div>
+            Насыщенность
+            <input type="range" min="0" max="500" value="100" onchange="saturateChange()" id="saturatevalue">
+            <span id="outputsaturate"></span>
+        </div>
+        <div>
+            Сепиа
+            <input type="range" min="0" max="360" value="0" onchange="sepiaChange()" id="sepiavalue">
+            <span id="outputsepia"></span>
+        </div>
         <div><img src="pictfilt.jpeg" id="blurImage" width="500px" height="500px"></div>
     </main>
     <footer>
