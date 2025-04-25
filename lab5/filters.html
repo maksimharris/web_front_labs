@@ -10,7 +10,7 @@
     <link rel="icon" href="../lab3/favicon-32x32.png">
     <style>
         div{
-            display: flex;
+            display:flex;
             flex-wrap: wrap;
             gap: 5px;
         }
@@ -52,9 +52,9 @@
             document.getElementById('blurImage').style.filter='saturate('+value+')';
         }
         function sepiaChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+            let value = document.getElementById('sepiavalue').value+'%';
+            document.getElementById("outputsepia").innerText=value;
+            document.getElementById('blurImage').style.filter='sepia('+value+')';
         }
     </script>
 </head>
@@ -104,7 +104,7 @@
             <input type="range" min="0" max="360" value="0" onchange="sepiaChange()" id="sepiavalue">
             <span id="outputsepia"></span>
         </div>
-        <div><img src="pictfilt.jpeg" id="blurImage" width="500px" height="500px"></div>
+        <div><img src="pictfilt.jpeg" id="blurImage" width="400px" height="400px"></div>
     </main>
     <footer>
         <hr>
