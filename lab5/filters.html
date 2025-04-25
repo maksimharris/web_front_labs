@@ -46,10 +46,10 @@
             document.getElementById('outputinvert').innerText=value;
             document.getElementById('blurImage').style.filter='invert('+value+')';
         }
-        function saturareChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+        function saturateChange(){
+            let value = document.getElementById("saturatevalue").value+'%';
+            document.getElementById("outputsaturate").innerText=value;
+            document.getElementById('blurImage').style.filter='saturate('+value+')';
         }
         function sepiaChange(){
             let value = document.getElementById('blurValue').value+'px';
