@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 6</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function showmultipletable(){
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+            for(i=1; i<=10; i++){
+                let s = `<div>${i}*7 =${i*7}</div>`;
+                tbl.innerHTML +=s;
+            }
+
+        }
+
+    </script>
+    <style>
+        .multitable{
+            max-width: 400px;
+            margin:20px auto;
+            background: linear-gradient()
+            
+        }
+        .inputs{
+            margin-top: 10px;
+
+
+        }
+    </style>
+</head>
+<body onload = "showmultipletable()">
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 6
+        <hr>
+    </header>
+    <main>
+        <div class="multitable">
+            <div id="mtable"></div>
+            <div class = 'inputs'>
+                <label>Умножить на <input type="number" placeholder="Например,2", id="mlp"></label><br>
+                <label>Начать с <input type="number", placeholder="Например,1", id="bgn"></label><br>
+                <label>Закончить на <input type="number" placeholder="Например, 10", id="nd"></label><br>
+                <input type="button" value="Таблица">
+            </div>
+        </div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
