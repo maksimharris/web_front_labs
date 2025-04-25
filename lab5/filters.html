@@ -8,6 +8,13 @@
     <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../lab3/favicon-16x16.png">
     <link rel="icon" href="../lab3/favicon-32x32.png">
+    <style>
+        div{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+    </style>
     <script>
         function blurChange(){
             let value = document.getElementById('blurValue').value+'px';
@@ -25,14 +32,14 @@
             document.getElementById('blurImage').style.filter='contrast('+value+')';
         }
         function grayscaleChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+            let value = document.getElementById('grayscalevalue').value+'%';
+            document.getElementById('outputgrayscale').innerText=value;
+            document.getElementById('blurImage').style.filter='grayscale('+value+')';
         }
         function huerotateChange(){
-            let value = document.getElementById('blurValue').value+'px';
-            document.getElementById('output').innerText=value;
-            document.getElementById('blurImage').style.filter='blur('+value+')';
+            let value = document.getElementById('huerotatevalue').value+'px';
+            document.getElementById('outputhuerotate').innerText=value;
+            document.getElementById('blurImage').style.filter='hue-rotate('+value+')';
         }
         function invertChange(){
             let value = document.getElementById('blurValue').value+'px';
@@ -72,8 +79,16 @@
             <input type="range" min="0" max="500" value="100" onchange="contrastChange()" id="contrastvalue">
             <span id="outputcontrast"></span>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+            Оттенки серого
+            <input type="range" min="0" max="100" value="0" onchange="grayscaleChange()" id="grayscalevalue">
+            <span id="outputgrayscale"></span>
+        </div>
+        <div>
+            Оттенки цвета
+            <input type="range" min="0" max="360" value="0" onchange="huerotateChange()" id="huerotatevalue">
+            <span id="outputhuerotate"></span>
+        </div>
         <div></div>
         <div></div>
         <div></div>
