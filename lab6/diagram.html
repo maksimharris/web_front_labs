@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 6</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function showdiagram(){
+            let data = [36, 86,55,28, 92,60, 41,17,9,43];
+            let color = ['red','green','purple', 'blue', 'orange', 'yellow', 'pink', 'lightblue', 'lightgreen','brown'];
+            let bars = document.getElementsByClassName('bar');
+            const diagHeight = document.getElementById('diag').clientHeight;
+            const maxData = Math.max(...data);
+            const k = diagHeight / maxData * 0.9;
+            for (let i = 0; i<data.length; i++){
+                bars[i].style.height = k*data[i]+'px'; 
+                bars[i].style.backgroundColor = color[i];
+                bars[i].innerHTML = data[i];
+            }
+        }
+    </script>
+    <style>
+        #diag{
+            background-color: white;
+            width:500px;
+            height:500px;
+            display: flex; 
+            align-items: flex-end;
+        }
+        .bar{
+            display: inline-block;
+            margin-left: 10px;
+            width: 35px;
+            height: 200px;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body onload = 'showdiagram()'>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 6
+        <hr>
+    </header>
+    <main>
+        <div id="diag">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
