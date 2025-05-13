@@ -16,24 +16,31 @@
                 let s = `<div>${i} x 7 =${i*7}</div>`;
                 tbl.innerHTML +=s;
             }
+        }
         function showlogicmtable(){
             let tbl = document.getElementById('mtable');
-            tbl.innerHTML = ' ';
             tbl.innerHTML = '<h1>Таблица умножения</h1>';
-
             let multiple = document.getElementById('multiple');
             let begn = document.getElementById('begn');
             let ends = document.getElementById('ends');
-            let mpl = parseInt(multiplee.value);
-            let bgn = parseInt(begne.value);
-            let nd = parseInt(endse.value);
+            let mpl = parseInt(multiple.value);
+            let bgn = parseInt(begn.value);
+            let nd = parseInt(ends.value);
+            if (bgn>nd){
+                alert('Некорректное значение');
+                return;
+            }
+            if (isNaN(bgn) || isNaN(nd)){
+                alert('Не хватает значений');
+                return;
+            }
             for (i=bgn; i<=nd; i++){
                 let s = `<div>${i}*${mpl} = ${i*mpl}</div>`;
                 tbl.innerHTML +=s;
             }
         }
 
-        }
+        
 
     </script>
     <style>
@@ -66,9 +73,9 @@
         <div class="multitable">
             <div id="mtable"></div>
             <div class = 'inputs'>
-                <label>Умножить на <input type="number" placeholder="Например,2" value = '7' id="multiple"></label><br>
-                <label>Начать с <input type="number" placeholder="Например,1" id="begn"></label><br>
-                <label>Закончить на <input type="number" placeholder="Например, 10" id="ends"></label><br>
+                <label>Умножить на <input type="number" value = '7' id="multiple"></label><br>
+                <label>Начать с <input type="number" value = '1' id="begn"></label><br>
+                <label>Закончить на <input type="number" value = '10' id="ends"></label><br>
                 <input type="button" value="Таблица" onclick="showlogicmtable()">
             </div>
         </div>
