@@ -13,9 +13,25 @@
             let tbl = document.getElementById('mtable');
             tbl.innerHTML = '<h1>Таблица умножения</h1>';
             for(i=1; i<=10; i++){
-                let s = `<div>${i}*7 =${i*7}</div>`;
+                let s = `<div>${i} x 7 =${i*7}</div>`;
                 tbl.innerHTML +=s;
             }
+        function showlogicmtable(){
+            let tbl = document.getElementById('mtable');
+            tbl.innerHTML = ' ';
+            tbl.innerHTML = '<h1>Таблица умножения</h1>';
+
+            let multiple = document.getElementById('multiple');
+            let begn = document.getElementById('begn');
+            let ends = document.getElementById('ends');
+            let mpl = parseInt(multiplee.value);
+            let bgn = parseInt(begne.value);
+            let nd = parseInt(endse.value);
+            for (i=bgn; i<=nd; i++){
+                let s = `<div>${i}*${mpl} = ${i*mpl}</div>`;
+                tbl.innerHTML +=s;
+            }
+        }
 
         }
 
@@ -24,13 +40,20 @@
         .multitable{
             max-width: 400px;
             margin:20px auto;
-            background: linear-gradient()
+            padding: 20px;
+            background-color:blanchedalmond;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color:coral;
+            box-shadow: 1px 4px 1px;
+            font-size: 16pt;
             
         }
         .inputs{
             margin-top: 10px;
-
-
+            text-align: left;
+        }
+        h1{
+            text-align: center;
         }
     </style>
 </head>
@@ -43,10 +66,10 @@
         <div class="multitable">
             <div id="mtable"></div>
             <div class = 'inputs'>
-                <label>Умножить на <input type="number" placeholder="Например,2", id="mlp"></label><br>
-                <label>Начать с <input type="number", placeholder="Например,1", id="bgn"></label><br>
-                <label>Закончить на <input type="number" placeholder="Например, 10", id="nd"></label><br>
-                <input type="button" value="Таблица">
+                <label>Умножить на <input type="number" placeholder="Например,2" value = '7' id="multiple"></label><br>
+                <label>Начать с <input type="number" placeholder="Например,1" id="begn"></label><br>
+                <label>Закончить на <input type="number" placeholder="Например, 10" id="ends"></label><br>
+                <input type="button" value="Таблица" onclick="showlogicmtable()">
             </div>
         </div>
     </main>
