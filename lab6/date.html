@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 6</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function showDate(){
+            let out = document.getElementById('current-date');
+            let today = new Date();
+            let rus = today.toLocaleString('ru-RU');
+            let bra = today.toLocaleString('pt-BR');
+            let ind = today.toLocaleString('pa-IN');
+            let chi = today.toLocaleString('zh');
+            let syr = today.toLocaleString('syr');
+            out.innerHTML = `<div class="ru">1. Дата и время для русской локали: ${rus}</div><br>
+                            <div class = "bra">"2. Дата и время для бразильской локали: ${bra}</div><br>
+                            <div class = "ind">3. Дата и время для индийской локали: ${ind}</div><br>
+                            <div class = "chi">4. Дата и время для китайской локали: ${chi}</div><br>
+                            <div class = "syr">5. Дата и время для сирийской локали: ${syr}</div>
+            `
+        }
+    </script>
+    <style>
+        #current-date{
+            background-color: goldenrod;
+            color: #5e2104;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 16pt;
+            row-gap: 20px;
+            text-shadow: 2px 3px 7px rgb(75, 56, 7);
+            line-height: 40px;
+        }
+        #current-date:hover {
+            transform: translateY(-3px);
+        }
+        .ru:hover{
+            background: linear-gradient(to bottom, white, blue, red);
+            color:white;
+        }
+        .bra:hover{
+           background: linear-gradient(to right, rgb(8, 241, 8), yellow);
+           border-radius: 8px;
+           box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .ind:hover{
+            background: linear-gradient(to right, rgb(175, 115, 3), white);
+            border-radius: 8px;
+           box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .chi:hover{
+           background-color: red;
+           text-shadow: 2px 3px 7px #e9ec09;
+           color:#e9ec09;
+           border-radius: 8px;
+        }
+        .syr:hover{
+            background: linear-gradient(to bottom, green,white,black);
+            color:rgb(114, 8, 8);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body onload = "showDate()">
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 6
+        <hr>
+    </header>
+    <main>
+        <div id="current-date"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
