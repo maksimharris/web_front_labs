@@ -24,6 +24,36 @@
                             <div class = "syr">5. Дата и время для сирийской локали: ${syr}</div>
             `
         }
+        function ChangeColor(){
+            const header = document.getElementsByTagName('header')[0];
+            const rgb = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
+            header.style.color = rgb;
+        }
+        let timerNum;
+        function startChangeColors(){
+            ChangeColor();
+            timerNum = setInterval(ChangeColor(),2000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+        function stopChangeColors(){
+            clearInterval(timerNum);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
+        }
+        function startTimeUpdate() {
+            showDate();
+            timeUpdateInterval = setInterval(showDate, 1000);
+            document.getElementById('update-time-btn').disabled = true;
+            document.getElementById('stop-time-btn').disabled = false;
+        }
+        
+        function stopTimeUpdate() {
+            clearInterval(timeUpdateInterval);
+            document.getElementById('update-time-btn').disabled = false;
+            document.getElementById('stop-time-btn').disabled = true;
+        }
+
     </script>
     <style>
         #current-date{
@@ -65,6 +95,9 @@
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
+        header{
+            transition: 1s 1s;
+        }
     </style>
 </head>
 <body onload = "showDate()">
@@ -74,6 +107,12 @@
     </header>
     <main>
         <div id="current-date"></div>
+        <div>
+            <button onclick="startChangeColors()" id="start-btn">Старт</button>
+            <button onclick = "stopChangeColors()" disabled id = "stop-btn">Стоп</button>
+            <button onclick="startTimeUpdate()" id="update-time-btn">Обновлять время</button>
+            <button onclick="stopTimeUpdate()" disabled id="stop-time-btn">Остановить обновление</button>
+        </div>
     </main>
     <footer>
         <hr>
