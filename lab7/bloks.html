@@ -8,6 +8,19 @@
     <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../lab3/favicon-16x16.png">
     <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function addNewBlock(){
+            let newBlock = document.createElement('div');
+            newBlock.style.backgroundImage = 'linear-gradient(to left, #FD2727,  green)';
+            newBlock.style.height = '20px';
+            newBlock.style.margin = '20px';
+            newBlock.style.width = '100px';
+            newBlock.style.borderWidth = '3px';
+            newBlock.style.borderStyle = 'solid';
+            newBlock.style.borderColor = 'white';
+            document.querySelector('main').appendChild(newBlock);
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -15,7 +28,8 @@
         <hr>
     </header>
     <main>
-        <li><a href = "bloks.html" style="text-decoration: none">Таблица умножения</a></li>
+        <button onclick="addNewBlock()">Добавить блок</button>
+
     </main>
     <footer>
         <hr>
