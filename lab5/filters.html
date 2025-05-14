@@ -37,9 +37,9 @@
             document.getElementById('blurImage').style.filter='grayscale('+value+')';
         }
         function huerotateChange(){
-            let value = document.getElementById('huerotatevalue').value+'px';
+            let value = document.getElementById('huerotatevalue').value+'deg';
             document.getElementById('outputhuerotate').innerText=value;
-            document.getElementById('blurImage').style.filter='huerotate('+value+')';
+            document.getElementById('blurImage').style.filter='hue-rotate( '+value+' )';
         }
         function invertChange(){
             let value = document.getElementById('invertvalue').value+'%';
