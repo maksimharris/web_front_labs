@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 7</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script src="dollar-data.js"></script>
+    <script>
+        function showExchange(){
+            let table = document.getElementById('dollar-table');
+            table.innerHTML = '';
+            for (let i = 0;i<exchange.length; i++) {
+                let tr = document.createElement('tr');
+                let td = document.createElement('td');
+                td.innerText = exchange[i];
+                tr.appendChild(td);
+                table.appendChild(tr);
+            }
+            let sum = 0;
+            for (let i = 0; i<exchange.length;i++){
+                sum += exchange[i];
+            }
+            let average = sum/exchange.length;
+            average = average.toFixed(2);
+            let det = document.getElementById('detail');
+            det.innerText = 'Среднее значение доллара за 10 дней: '+ average;
+            return;
+            }
+
+        
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 7
+        <hr>
+    </header>
+    <main>
+        <button onclick = "showExchange()" id = 'clck'>Курс доллара</button>
+        <table border = "1" id="dollar-table"></table>
+        <div id="detail"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
