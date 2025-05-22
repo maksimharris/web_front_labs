@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 7</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script>
+        function getEuroExchange(){
+            let inpt = document.getElementById('inpt')
+            const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+            fetch(url)
+                .then(
+                    function(response){
+                        return response.json();
+                    }
+                )
+                .then(
+                    function(json){
+                        inpt.style.backgroundColor= '#74777B';
+                        inpt.style.height = '300px';
+                        inpt.style.width='400px';
+                        inpt.style.color='white';
+                        inpt.style.fontfamily='Stem';
+                        inpt.style.fontweight='700';
+                        inpt.style.boxShadow='5px 5px 3px gray';
+                        inpt.style.transition = '0.5s 0.5s';
+                        inpt.style.borderRadius = '10%';
+                        inpt.style.fontSize='12pt';
+                        inpt.style.textAlign = 'center';
+                        let nc = json.Valute.EUR.Value;
+                        let dq = json.Date;
+                        let pq = json.PreviousDate;
+                        let pc = json.Valute.EUR.Previous;
+                        let df = (nc - pc).toFixed(1);
+                        if (df>0){
+                            inpt.innerText = `Дата запроса: ${dq}
+                            Нынешний курс евро: ${nc}
+                            Дата прошлого запроса: ${pq}
+                            Курс на прошлую дату: ${pc}
+                            Изменение курса по сравнению с прошлой датой:${df}
+                            Курс повысился`;
+                        }
+                        else if(df<0){
+                            inpt.innerText = `Дата запроса: ${dq}<br>
+                            Нынешний курс евро: ${nc}<br>
+                            Дата прошлого запроса ${pq}<br>
+                            Курс на прошлую дату${pc}<br>
+                            Изменение курса по сравнению с прошлой датой:${df}<br>
+                            Курс понизился`;
+                        }
+                        else if (df=0){
+                            inpt.innerText = `Дата запроса: ${dq}<br>
+                            Нынешний курс евро: ${nc}<br>
+                            Дата прошлого запроса ${pq}<br>
+                            Курс на прошлую дату${pc}<br>
+                            Изменение курса по сравнению с прошлой датой:${df}<br>
+                            Курс не изменился`;
+                        }
+                    }
+            )
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Stem';
+            src: url('lab7/Stem-Medium.ttf');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        #inpt{
+            position: absolute;
+            font-size: 0pt;
+            left:550px;
+            height: 0px;
+            width: 0px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 7
+        <hr>
+    </header>
+    <main>
+        <button onclick="getEuroExchange()">Курс евро</button>
+        <div id="inpt"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
