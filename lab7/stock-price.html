@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 7</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+    <script src="data-tickers.js"></script>
+    <script>
+        function showTickers(){
+            let table1 = document.getElementById('ticks-tabel');
+            table1.innerHTML = '';
+
+            let th1 = document.createElement('th');
+            th1.innerText = 'Дата';
+
+            let th2 = document.createElement('th');
+            th2.innerText = 'Котировки';
+            let th3 = document.createElement('th');
+            th3.innerText = 'Изменение';
+
+            let headerRow = document.createElement('tr');
+            headerRow.appendChild(th1);
+            headerRow.appendChild(th2);
+            headerRow.appendChild(th3);
+
+            let thead = document.createElement('thead');
+            thead.appendChild(headerRow);
+            table1.appendChild(thead);
+
+            let tbody = document.createElement('tbody');
+            for (let i = 0; i<tickers.length; i++) {
+                let tr1 = document.createElement('tr');
+                let td1 = document.createElement('td'); 
+                td1.innerText = dates[i];
+                tr1.appendChild(td1);
+                let td2 = document.createElement('td');
+                td2.innerText = tickers[i]; 
+                tr1.appendChild(td2);
+                let td3 = document.createElement('td');
+                td3.innerText = (tickers[i+1]-tickers[i]).toFixed(2);
+                let result = parseFloat(td3.innerText);
+                if(isNaN(result)){
+                    td3.innerText = '-';
+                }
+                if(result<0){
+                    td3.style.color = 'red';
+                }
+                else if(result>0){
+                    td3.style.color = 'green';
+                }
+                else{
+                    td3.style.color = 'gray';
+                }
+                tr1.appendChild(td3);
+                tbody.appendChild(tr1);
+
+            }
+            table1.appendChild(tbody);
+            let sum = 0;
+            for (let i = 0; i<tickers.length;i++){
+                sum += tickers[i];
+            }
+            let average = sum/tickers.length;
+            average = average.toFixed(2);
+            let det = document.getElementById('detail');
+            const maxTickers = Math.max(...tickers);
+            const minTickers = Math.min(...tickers);
+            det.innerHTML = `Среднее значение котировок за 10 дней: ${average} <br>
+            Максимальное значение котировок за 10 дней: ${maxTickers} <br> 
+            Минимальное значение котировок за 10 дней: ${minTickers}`;
+            return;
+            }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 7
+        <hr>
+    </header>
+    <main>
+        <button onclick="showTickers()" id ="clck">Узнать котировки компаний</button>
+        <table border="1" id="ticks-tabel"></table>
+        <div id="detail"></div>
+    </main>
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
