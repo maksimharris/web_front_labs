@@ -18,6 +18,10 @@
     <main>
         <div id="app">
             <h1 gittitle = "messageRus">{{message}}</h1>
+            <p>Счётчик: {{counter}}</p>
+            <button @click = 'incCounter()'>++</button>
+            <button @click = 'decCounter()'>--</button>
+
         </div>
     </main>
     <footer>
@@ -29,9 +33,18 @@
             data(){
                 return{
                     message:'Hello!',
-                    messageRus:'Привет!'
+                    messageRus:'Привет!',
+                    counter: 1,
                 }
             },
+            methods:{
+                incCounter(){
+                    this.counter++;
+                },
+                decCounter(){
+                    this.counter--;
+                }
+            }
         }).mount('#app');
     </script>
 </body>
