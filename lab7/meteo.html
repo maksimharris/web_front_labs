@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Писарев Максим Иванович. Лабораторная работа 7</title>
+    <link rel = "stylesheet" href="../main.css">
+    <link rel="shortcut icon" href="../lab3/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../lab3/favicon-16x16.png">
+    <link rel="icon" href="../lab3/favicon-32x32.png">
+        <style>
+        .weather-card {
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            max-width: 300px;
+        }
+        
+        .weather-time {
+            margin: 10px 0;
+            padding: 8px;
+            background: #f0f0f0;
+            border-radius: 5px;
+        }
+        
+        .weather-title {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function getWeather() {
+            const url = 'https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FBangkok';
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    let output = '';
+                    const targetHours = ['T08:00', 'T12:00', 'T20:00'];
+                    
+                    targetHours.forEach(hour => {
+                        const index = data.hourly.time.findIndex(t => t.includes(hour));
+                        if(index !== -1) {
+                            const time = data.hourly.time[index].split('T')[1].slice(0,5);
+                            output += `
+                                <div class="weather-time">
+                                    ${time}: ${data.hourly.temperature_2m[index]}°C
+                                </div>
+                            `;
+                        }
+                    });
+
+                    document.getElementById('weatherResult').innerHTML = `
+                        <h2 class="weather-title">Погода в Новосибирске</h2>
+                        ${output}
+                    `;
+                })
+                .catch(() => {
+                    document.getElementById('weatherResult').innerHTML = 
+                        '<div style="color: red">Ошибка загрузки данных</div>';
+                });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        НГТУ, ФБИ, Лабораторная работа 7
+        <hr>
+    </header>
+
+    <main>
+        <button onclick="getWeather()">Показать температуру</button>
+        <div class="weather-card" id="weatherResult"></div>
+    </main>
+
+    <footer>
+        <hr>
+        &copy; Максим Писарев, ФБИ-31, 2 курс, 2025
+    </footer>
+</body>
+</html>
