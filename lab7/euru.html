@@ -37,7 +37,7 @@
                         let pc = json.Valute.EUR.Previous;
                         let df = (nc - pc).toFixed(1);
                         if (df>0){
-                            inpt.innerText = `Дата запроса: ${dq}
+                            inpt.innerHTML = `Дата запроса: ${dq}
                             Нынешний курс евро: ${nc}
                             Дата прошлого запроса: ${pq}
                             Курс на прошлую дату: ${pc}
@@ -45,7 +45,7 @@
                             Курс повысился`;
                         }
                         else if(df<0){
-                            inpt.innerText = `Дата запроса: ${dq}<br>
+                            inpt.innerHTML = `Дата запроса: ${dq}<br>
                             Нынешний курс евро: ${nc}<br>
                             Дата прошлого запроса ${pq}<br>
                             Курс на прошлую дату${pc}<br>
@@ -53,7 +53,7 @@
                             Курс понизился`;
                         }
                         else if (df=0){
-                            inpt.innerText = `Дата запроса: ${dq}<br>
+                            inpt.innerHTML = `Дата запроса: ${dq}<br>
                             Нынешний курс евро: ${nc}<br>
                             Дата прошлого запроса ${pq}<br>
                             Курс на прошлую дату${pc}<br>
