@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс тенге</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon-16x16.png">
+    <link rel="icon" href="favicon-32x32.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы калькулятора
+            const amountInput = document.getElementById('amount');
+            const convertBtn = document.getElementById('convert-btn');
+            const resultDiv = document.getElementById('result');
+            const swapBtn = document.getElementById('swap-btn');
+            
+            // Элементы графика
+            const dateRangeSelect = document.getElementById('date-range-select');
+            const updateChartBtn = document.getElementById('update-chart-btn');
+            const chartInfo = document.getElementById('chart-info');
+            let currencyChart = null;
+            
+            // Текущий курс тенге
+            let kztRate = 0;
+            let kztName = "Казахстанский тенге";
+            
+            // Загрузка текущих курсов
+            fetch('https://www.cbr-xml-daily.ru/daily_json.js')
+                .then(response => response.json())
+                .then(data => {
+                    // Проверяем, есть ли тенге в ответе
+                    if (data.Valute && data.Valute.KZT) {
+                        kztRate = data.Valute.KZT.Value / data.Valute.KZT.Nominal;
+                        kztName = data.Valute.KZT.Name;
+                        updateCurrentRate();
+                        updateChart();
+                    } else {
+                        throw new Error("Курс тенге не найден в ответе");
+                    }
+                })
+                .catch(error => {
+                    console.error('Ошибка загрузки курсов:', error);
+                    resultDiv.innerHTML = '<div class="error">Не удалось загрузить курс тенге</div>';
+                });
+            
+            // Обновление отображения текущего курса
+            function updateCurrentRate() {
+                document.getElementById('current-rate').textContent = `1 ${kztName} = ${kztRate.toFixed(4)} RUB`;
+            }
+            
+            // Конвертация валют
+            function convertCurrency() {
+                const amount = parseFloat(amountInput.value);
+                if (isNaN(amount)) {
+                    resultDiv.innerHTML = '<div class="error">Введите корректную сумму</div>';
+                    return;
+                }
+                
+                const conversionType = document.querySelector('input[name="conversion-type"]:checked').value;
+                
+                let result, formula;
+                if (conversionType === 'rub-to-kzt') {
+                    // Из рублей в тенге
+                    result = amount / kztRate;
+                    formula = `${amount.toFixed(2)} RUB = ${result.toFixed(2)} KZT`;
+                } else {
+                    // Из тенге в рубли
+                    result = amount * kztRate;
+                    formula = `${amount.toFixed(2)} KZT = ${result.toFixed(2)} RUB`;
+                }
+                
+                resultDiv.innerHTML = `
+                    <div class="conversion-result">
+                        ${formula}<br>
+                        <small>1 ${conversionType === 'rub-to-kzt' ? 'KZT' : 'RUB'} = ${(conversionType === 'rub-to-kzt' ? kztRate : 1/kztRate).toFixed(4)} ${conversionType === 'rub-to-kzt' ? 'RUB' : 'KZT'}</small>
+                    </div>
+                `;
+            }
+            
+            // Обмен направления конвертации
+            function swapConversion() {
+                const currentType = document.querySelector('input[name="conversion-type"]:checked').value;
+                document.querySelector(`input[value="${currentType === 'rub-to-kzt' ? 'kzt-to-rub' : 'rub-to-kzt'}"]`).checked = true;
+                convertCurrency();
+            }
+            
+            // Загрузка исторических данных для графика
+            function updateChart() {
+                const days = parseInt(dateRangeSelect.value);
+                const promises = [];
+                
+                // Собираем запросы за каждый день
+                for (let i = 0; i < days; i++) {
+                    const date = new Date();
+                    date.setDate(date.getDate() - i);
+                    const dateStr = formatDate(date);
+                    promises.push(
+                        fetch(`https://www.cbr-xml-daily.ru/archive/${dateStr}/daily_json.js`)
+                            .then(response => {
+                                if (!response.ok) throw new Error('Нет данных');
+                                return response.json();
+                            })
+                            .catch(error => null) // Игнорируем ошибки для отдельных дней
+                    );
+                }
+                
+                // Обрабатываем все запросы
+                Promise.all(promises).then(results => {
+                    const validData = results.filter(Boolean);
+                    if (validData.length === 0) {
+                        throw new Error("Нет данных за выбранный период");
+                    }
+                    
+                    const dates = [];
+                    const rates = [];
+                    
+                    validData.forEach(data => {
+                        if (data.Date && data.Valute?.KZT) {
+                            dates.push(data.Date);
+                            rates.push(data.Valute.KZT.Value / data.Valute.KZT.Nominal);
+                        }
+                    });
+                    
+                    // Сортируем по дате
+                    dates.sort((a, b) => new Date(a) - new Date(b));
+                    const sortedRates = dates.map(date => {
+                        const index = dates.indexOf(date);
+                        return rates[index];
+                    });
+                    
+                    const displayDates = dates.map(date => formatDisplayDate(date));
+                    renderChart(displayDates, sortedRates);
+                }).catch(error => {
+                    console.error('Ошибка загрузки исторических данных:', error);
+                    chartInfo.innerHTML = '<div class="error">Не удалось загрузить исторические данные</div>';
+                });
+            }
+                
+            // Отрисовка графика
+            function renderChart(dates, rates) {
+                const ctx = document.getElementById('currency-chart').getContext('2d');
+                if (currencyChart) {
+                    currencyChart.destroy();
+                }
+                
+                currencyChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: dates,
+                        datasets: [{
+                            label: `Курс KZT к RUB`,
+                            data: rates,
+                            backgroundColor: 'rgba(0, 84, 184, 0.7)',
+                            borderColor: 'rgba(0, 84, 184, 1)',
+                            borderWidth: 1,
+                            hoverBackgroundColor: 'rgba(0, 84, 184, 0.9)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                title: {
+                                    display: true,
+                                    text: 'Курс (RUB)'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Дата'
+                                }
+                            }
+                        },
+                        onClick: (e, activeEls) => {
+                            if (activeEls.length > 0) {
+                                const idx = activeEls[0].index;
+                                const date = dates[idx];
+                                const rate = rates[idx];
+                                chartInfo.innerHTML = `
+                                    <div class="chart-point-info">
+                                        <strong>${date}</strong><br>
+                                        ${kztName}<br>
+                                        1 KZT = ${rate.toFixed(4)} RUB
+                                    </div>
+                                `;
+                                
+                                // Выделяем выбранный столбец
+                                currencyChart.data.datasets[0].backgroundColor = dates.map((d, i) => 
+                                    i === idx ? 'rgba(231, 76, 60, 0.9)' : 'rgba(0, 84, 184, 0.7)');
+                                currencyChart.update();
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Вспомогательные функции для работы с датами
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}/${month}/${day}`;
+            }
+            
+            function formatDisplayDate(dateStr) {
+                const date = new Date(dateStr);
+                return date.toLocaleDateString('ru-RU', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric'
+                });
+            }
+            
+            // Обработчики событий
+            convertBtn.addEventListener('click', convertCurrency);
+            swapBtn.addEventListener('click', swapConversion);
+            updateChartBtn.addEventListener('click', updateChart);
+            
+            // Первоначальная конвертация при загрузке
+            amountInput.value = '1000';
+            document.querySelector('input[value="rub-to-kzt"]').checked = true;
+        });
+    </script>
+    <style>
+        header {
+            color: rgb(103, 103, 231);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .describtion {
+            position: absolute;
+            top: 50px;
+            left: 300px;
+            font-size: 16pt;
+        }
+        
+        footer {
+            background-color: rgb(65, 65, 238);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+        
+        .contacts {
+            position: absolute;
+            top: 20px;
+            left: 800px;
+            color: rgb(144, 142, 139);
+            font-size: 12pt;
+        }
+        
+        .works {
+            position: absolute;
+            top: 80px;
+            left: 800px;
+            color: rgb(144, 142, 139);
+        }
+        
+        .links {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .links a {
+            display: inline-block;
+        }
+        
+        .side-menu {
+            width: 250px;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: fixed;
+            right: 0;
+            top: 120px;
+            height: calc(100vh - 140px);
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .side-menu h3 {
+            color: #0054B8;
+            border-bottom: 2px solid #0054B8;
+            padding-bottom: 10px;
+        }
+        
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .side-menu li {
+            margin: 15px 0;
+        }
+        
+        .side-menu a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+        }
+        
+        .side-menu a:hover {
+            color: #0054B8;
+            font-weight: bold;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            padding-right: 290px; 
+        }
+        
+        /* Стили для калькулятора */
+        .currency-converter {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin-bottom: 40px;
+        }
+        
+        .currency-converter h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+        
+        .current-rate {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #0054B8;
+            font-weight: bold;
+        }
+        
+        .converter-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .conversion-type {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .conversion-type label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .input-group label {
+            font-weight: bold;
+            color: #444;
+        }
+        
+        .input-group input {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #0054B8;
+            box-shadow: 0 0 0 3px rgba(0, 84, 184, 0.2);
+            outline: none;
+        }
+        
+        .converter-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .converter-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #0054B8, #3a7bd5);
+            color: white;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 84, 184, 0.2);
+        }
+        
+        .converter-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 84, 184, 0.3);
+            background: linear-gradient(135deg, #0047a1, #3068c2);
+        }
+        
+        .converter-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 84, 184, 0.2);
+        }
+        
+        .swap-btn {
+            background: linear-gradient(135deg, #16a085, #1abc9c);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 6px rgba(22, 160, 133, 0.2);
+        }
+        
+        .swap-btn:hover {
+            transform: translateY(-2px) rotate(180deg);
+            box-shadow: 0 6px 12px rgba(22, 160, 133, 0.3);
+            background: linear-gradient(135deg, #14947b, #17a58d);
+        }
+        
+        .conversion-result {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #0054B8;
+            font-size: 1.2em;
+            text-align: center;
+            margin-top: 20px;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .conversion-result small {
+            color: #666;
+            font-size: 0.8em;
+        }
+        
+        .error {
+            color: #e74c3c;
+            background-color: #fdecea;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #e74c3c;
+            margin: 15px 0;
+        }
+        
+        /* Стили для графика */
+        .currency-chart-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin-bottom: 40px;
+        }
+        
+        .currency-chart-container h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            border-bottom: 2px solid #eaeaea;
+            padding-bottom: 15px;
+        }
+        
+        .chart-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .chart-controls select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 16px;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 400px;
+            margin-top: 20px;
+        }
+        
+        .chart-point-info {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #0054B8;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.PNG" alt="Логотип Россети Волга">
+        <div class="describtion">ПАО «Россети Волга»</div>
+        <div class="contacts">
+            Единый контакт-центр «Россети»<br>
+            <img src="tel.PNG" width="30" height="30" alt="Телефон"><span style="font-size:20pt;">8 800 220 0 220</span>
+        </div>
+        <div class="works">
+            Режим работы: круглосуточно
+        </div>
+        <div class="links">
+            <a href="https://t.me/rosseti_volga"><img src="i (2).webp" width="50" height="50" alt="Telegram"></a>
+            <a href="https://ok.ru/dk?st.cmd=anonymMain&st.lgi=HGvnQsYVg78s"><img src="OK (1).png" width="50" height="50" alt="Одноклассники"></a>
+            <a href="https://vk.com/rossetivolga"><img src="VK.png" width="50" height="50" alt="ВКонтакте"></a>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <div id="currency-converter-section" class="content-section active-section">
+            <div class="currency-converter">
+                <h2>Конвертер тенге</h2>
+                <div class="current-rate" id="current-rate">Загрузка курса...</div>
+                
+                <div class="converter-form">
+                    <div class="conversion-type">
+                        <label>
+                            <input type="radio" name="conversion-type" value="rub-to-kzt" checked>
+                            RUB → KZT
+                        </label>
+                        <label>
+                            <input type="radio" name="conversion-type" value="kzt-to-rub">
+                            KZT → RUB
+                        </label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="amount">Сумма для конвертации</label>
+                        <input type="number" id="amount" min="0" step="0.01" placeholder="Введите сумму">
+                    </div>
+                    
+                    <div class="converter-actions">
+                        <button id="convert-btn" class="converter-btn">Конвертировать</button>
+                        <button id="swap-btn" class="swap-btn" title="Поменять направление конвертации">⇄</button>
+                    </div>
+                    
+                    <div id="result" class="conversion-result">
+                        Результат конвертации появится здесь
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="currency-chart-section" class="content-section">
+            <div class="currency-chart-container">
+                <h2>Динамика курса тенге</h2>
+                
+                <div class="chart-controls">
+                    <div class="input-group">
+                        <label for="date-range-select">Период</label>
+                        <select id="date-range-select">
+                            <option value="30">1 месяц</option>
+                            <option value="90">3 месяца</option>
+                            <option value="180">6 месяцев</option>
+                            <option value="365">1 год</option>
+                        </select>
+                    </div>
+                    
+                    <button id="update-chart-btn" class="converter-btn">Обновить график</button>
+                </div>
+                
+                <div class="chart-wrapper">
+                    <canvas id="currency-chart"></canvas>
+                </div>
+                
+                <div id="chart-info" class="chart-point-info">
+                    Щелкните по столбцу, чтобы увидеть курс на выбранную дату
+                </div>
+            </div>
+        </div>
+        
+        <div class="side-menu">
+            <h3>Меню</h3>
+            <ul>
+                <li><a href="atcompany.html">О компании</a></li>
+                <li><a href="news.html">Новости</a></li>
+                <li><a href="calcurs.html">Курс тенге</a></li>
+            </ul>
+        </div>
+    </main>
+    <footer>
+        <hr>
+        © ПАО «Россети Волга», 2025<br>
+        <br>
+        Котировки с задержкой в соответствии с требованием бирж. Данные предоставлены Центральным банком РФ.
+    </footer>
+</body>
+</html>
