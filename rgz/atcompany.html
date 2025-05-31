@@ -33,11 +33,7 @@
                 });
             });
             
-            // Можно также добавить обработку кликов в боковом меню
-            const menuLinks = document.querySelectorAll('.side-menu a');
-            menuLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault(); // Отменяем стандартное поведение ссылки
+
                     
                     const targetId = this.getAttribute('href').substring(1);
                     if (targetId === 'history') {
@@ -53,8 +49,7 @@
                     }
                     // Можно добавить обработку других пунктов меню
                 });
-            });
-        });
+
     </script>
     <style>
         header {
@@ -671,7 +666,7 @@
             <h3>Меню</h3>
             <ul>
                 <li><a href="atcompany.html">О компании</a></li>
-                <li><a href="news.html">Новости</a></li>
+                <li><a href="news.html">Новости</a> </li>
             </ul>
         </div>
     </main>
