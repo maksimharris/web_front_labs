@@ -8,33 +8,52 @@
     <link rel="icon" href="favicon-16x16.png">
     <link rel="icon" href="favicon-32x32.png">
     <script>
-        // Ждем загрузки DOM
-        document.addEventListener('DOMContentLoaded', function() {
-            // Получаем все кнопки переключения контента
-            const buttons = document.querySelectorAll('.content-btn');
+       document.addEventListener('DOMContentLoaded', function() {
+    // Получаем все кнопки переключения контента
+    const buttons = document.querySelectorAll('.content-btn');
+    
+    // Добавляем обработчик клика для каждой кнопки
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Получаем ID секции из атрибута data-section
+            const sectionId = this.getAttribute('data-section');
             
-            // Добавляем обработчик клика для каждой кнопки
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Получаем ID секции из атрибута data-section
-                    const sectionId = this.getAttribute('data-section');
-                    
-                    // Скрываем все секции
-                    document.querySelectorAll('.content-section').forEach(section => {
-                        section.classList.remove('active-section');
-                    });
-                    
-                    // Показываем нужную секцию
-                    document.getElementById(sectionId + '-section').classList.add('active-section');
-                    
-                    // Обновляем активную кнопку (добавляем стили по желанию)
-                    buttons.forEach(btn => btn.classList.remove('active-btn'));
-                    this.classList.add('active-btn');
+            // Скрываем все секции
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+            
+            // Показываем нужную секцию
+            document.getElementById(sectionId + '-section').classList.add('active-section');
+            
+            // Обновляем активную кнопку
+            buttons.forEach(btn => btn.classList.remove('active-btn'));
+            this.classList.add('active-btn');
+        });
+    });
+    
+            // Обработчик для кнопки "Наверх"
+            document.querySelector('.back-to-top').addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
             });
             
-
-                    
+            // Показываем/скрываем кнопку "Наверх" при прокрутке
+            window.addEventListener('scroll', function() {
+                const backToTop = document.querySelector('.back-to-top');
+                if (window.pageYOffset > 300) {
+                    backToTop.style.opacity = '1';
+                    backToTop.style.visibility = 'visible';
+                } else {
+                    backToTop.style.opacity = '0';
+                    backToTop.style.visibility = 'hidden';
+                }
+            });
+        });
+ 
                     const targetId = this.getAttribute('href').substring(1);
                     if (targetId === 'history') {
                         // Показываем историю
@@ -48,7 +67,7 @@
                         document.querySelector('.content-btn[data-section="history"]').classList.add('active-btn');
                     }
                     // Можно добавить обработку других пунктов меню
-                });
+
 
     </script>
     <style>
@@ -494,6 +513,38 @@
             mask-repeat: no-repeat;
             mask-position: center;
         }
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0054B8, #3a7bd5);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 24px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+        .back-to-top:hover {
+            background: linear-gradient(135deg, #003d8a, #2a5db0);
+            transform: translateY(-3px);
+        }
+
+        .back-to-top:active {
+            transform: translateY(0);
+        }
+
+        .back-to-top::before {
+            content: '↑';
+        }
     </style>
 </head>
 <body>
@@ -679,5 +730,6 @@
         <br>
         Котировки с задержкой в соответствии с требованием бирж. Предоставлено rustocks.com.
     </footer>
+    <a href="#" class="back-to-top"></a>
 </body>
 </html>
