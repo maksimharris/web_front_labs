@@ -47,15 +47,24 @@
                 <div class="card" style = "width:18 rem;">
                     <div class="card-body">
                         <h2 class = "card-title"><i class="bi bi-list-columns"></i>Цветы</h2>
+                            <button @click="addFlower1()" class="btn btn-success mb-3">
+                                <i class="bi bi-plus"></i> Добавить цветок
+                            </button>
                         <ul class = "list-group">
                             <li v-for = '(flower1,id1) in flowers1' class = "list-group-item">
                                 <i class="bi bi-flower1"></i>{{flower1}} <button @click = "edit1(id1,flower1)">?</button>
+                                <button @click="deleteFlower1(id1)" class="btn btn-sm btn-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </li>
                         </ul>
                     </div>
                 </div>
                 <hr>
                 <h2><i class="bi bi-list-columns"></i>Цветы</h2>
+                <button @click="addFlower2()" class="btn btn-success">
+                    <i class="bi bi-plus"></i> Добавить цветок
+                </button>
                 <table class = "table table-dark">
                     <thead>
                         <tr>
@@ -71,7 +80,10 @@
                         <td>
                             <button @click = "edit2(id2,flower2)" class="btn btn-primary" v-if="flower2 !== null">
                                 <i class = "bi bi-pen"></i>
-                            </button>
+                        </button>
+                        <button @click="deleteFlower2(id2)" class="btn btn-danger me-1" v-if="flower2 !== null">
+                            <i class="bi bi-trash"></i>
+                        </button>
                             <div class="spinner-border" role = "status" v-if = "flower2===null"></div>
                         </td>
                     </tr>
@@ -142,8 +154,30 @@
                 sum(){
                     this.result = this.a + this.b;
                 },
+                deleteFlower1(id1) {
+                    if (confirm('Вы уверены, что хотите удалить этот цветок?')) {
+                        this.flowers1.splice(id1, 1);
+                    }
+                },
+                deleteFlower2(id2) {
+                    if (confirm('Вы уверены, что хотите удалить этот цветок?')) {
+                        this.flowers2.splice(id2, 1);
+                    }
+                },
+                addFlower1() {
+                    const newFlower = prompt('Введите название нового цветка:');
+                    if (newFlower) {
+                        this.flowers1.push(newFlower);
+                    }
+                },
+                addFlower2() {
+                    const newFlower = prompt('Введите название нового цветка:');
+                    if (newFlower) {
+                        this.flowers2.push(newFlower);
+                }
             }
-        }).mount('#app');
+        }
+    }).mount('#app');
     </script>
 </body>
 </html>
