@@ -24,18 +24,22 @@
                             <div class = "syr">5. Дата и время для сирийской локали: ${syr}</div>
             `
         }
+        let timerNum;
+        let timeUpdateInterval;
+
         function ChangeColor(){
             const header = document.getElementsByTagName('header')[0];
             const rgb = `rgb(${Math.random()*255},${Math.random()*255},${Math.random()*255})`;
             header.style.color = rgb;
         }
-        let timerNum;
+
         function startChangeColors(){
-            ChangeColor();
-            timerNum = setInterval(ChangeColor(),2000);
+            ChangeColor(); 
+            timerNum = setInterval(ChangeColor, 2000); 
             document.getElementById('start-btn').disabled = true;
             document.getElementById('stop-btn').disabled = false;
         }
+
         function stopChangeColors(){
             clearInterval(timerNum);
             document.getElementById('start-btn').disabled = false;
